@@ -1,0 +1,25 @@
+name: Nim compile
+
+on:
+  workflow_dispatch: {}
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Checkout source code
+      - uses: actions/checkout@v2
+      
+      # Setup Nim
+      - uses: jiro4989/setup-nim-action@v1
+
+      # Compile
+      - name: Compile
+        run: nimble build
+
+      # Upload executable
+      - uses: actions/upload-artifact@v2
+        with:
+          name: lifetips
+          path: ./lifetips
